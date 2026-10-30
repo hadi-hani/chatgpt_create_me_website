@@ -70,7 +70,8 @@
       </article>`;
     }).join("");
   }
-  function renderDirectory(t) {\n    const url = links.directory || "";\n    $("#socialDirectory").innerHTML = isRealUrl(url) ? `<a class="directory-link" href="${url}" target="_blank" rel="noopener noreferrer"><span>${t.directory}</span><span aria-hidden="true">↗</span></a>` : "";\n  }\n  function renderProjects(t) {
+  function renderDirectory(t) {
+    const url = links.directory || "";\n    $("#socialDirectory").innerHTML = isRealUrl(url) ? `<a class="directory-link" href="${url}" target="_blank" rel="noopener noreferrer"><span>${t.directory}</span><span aria-hidden="true">↗</span></a>` : "";\n  }\n  function renderProjects(t) {
     $("#projectGrid").innerHTML = ["quantumVortex", "functionGrapher"].map((id) => {
       const item = t.projects[id];
       const url = links.projects?.[id] || "";
@@ -88,7 +89,8 @@
       { id: "kofi", label: t.linkKofi, icon: "♥" },
       { id: "payhip", label: t.linkPayhip, icon: "↗" }
     ];
-    const active = support.filter(item => isRealUrl(links.support?.[item.id] || ""));\n    $("#support").hidden = active.length === 0;\n    $("#supportActions").innerHTML = active.map((item) => {
+    const active = support.filter(item => isRealUrl(links.support?.[item.id] || ""));
+    $("#support").hidden = active.length === 0;\n    $("#supportActions").innerHTML = active.map((item) => {
       const url = links.support?.[item.id] || "";
       return `<div class="support-action-wrap">${actionLink(url, `<span class="support-icon">${item.icon}</span>${item.label}`, "support-action")}</div>`;
     }).join("");
