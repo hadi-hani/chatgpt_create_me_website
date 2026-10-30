@@ -5,6 +5,7 @@
   Empty URLs are shown as disabled cards, never as broken links.
 */
 window.TEACHHORIZON_LINKS = {
+  directory: "https://linktr.ee/TeachHorizon",
   socials: {
     tiktok: "",
     youtube: "",
