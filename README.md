@@ -7,7 +7,9 @@ A small, bilingual Arabic/English, responsive static website for `teachhorizon.o
 - Arabic-first interface and an Arabic/English language toggle.
 - Responsive cards for TikTok, YouTube, Instagram, Facebook, Threads, and Pinterest.
 - A personal experiments area for Quantum Vortex and Function Grapher.
-- Separate personal support links for Ko-fi and Payhip.
+- An all-links directory pointing to the TeachHorizon Linktree page.
+- About, Contact, Privacy Policy, Terms of Use, and custom 404 pages.
+- A monochrome black-and-white visual identity inspired by the supplied brand mark.
 - No database, server-side app, analytics, tracking script, or educational/blog section.
 - Docker + Nginx configuration for Dokploy.
 
@@ -19,7 +21,7 @@ Edit `links.js`. Replace each empty string with the full URL for that destinatio
 instagram: "https://www.instagram.com/your-handle/"
 ```
 
-Social profiles and Ko-fi/Payhip destinations are currently blank because the exact URLs could not be verified from the Linktree page. Empty destinations render as disabled cards rather than fake links.
+Individual social profile URLs and Ko-fi/Payhip destinations remain unconfigured until their exact destinations are confirmed. The all-links directory currently points to https://linktr.ee/TeachHorizon. Unconfigured support links are hidden; social cards are shown as unavailable rather than using guessed destinations.
 
 Known project destinations are already configured:
 
@@ -51,6 +53,9 @@ Open `http://localhost:8080`.
 - `main.js` — page rendering and language toggle
 - `links.js` — editable destination URLs
 - `Dockerfile`, `nginx.conf` — container and web server setup
-- `favicon.svg` — site icon
+- `favicon.svg`, `brand-logo.svg` — monochrome brand marks
+- `about.html`, `contact.html`, `privacy.html`, `terms.html`, `404.html` — secondary pages
+- `legal.js` — shared Arabic/English language toggle for secondary pages
+- `robots.txt`, `sitemap.xml` — crawl guidance and sitemap
 
 The website is static and requires no database or environment secrets. The repository contains the site files; it does not automatically deploy to Dokploy or edit Cloudflare DNS.
