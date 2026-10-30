@@ -8,9 +8,9 @@
       socialKicker: "ابقَ على تواصل", socialTitle: "تجدني هنا", socialNote: "تابع المحتوى والأفكار الجديدة عبر منصات التواصل.",
       projectKicker: "مختبر التجارب", projectTitle: "أفكار قيد التجربة", projectNote: "مشاريع شخصية وتجارب vibe-coding — مساحة للتعلّم واللعب بالأفكار.",
       supportKicker: "دعم بسيط", supportTitle: "ساعدني نواصل التجربة", supportDescription: "إذا عجبتك التجارب أو حبيت تدعم الوقت والمجهود وراءها، تلقى هنا طرق الدعم الشخصية.",
-      setupNote: "بعض الروابط ما زالت تحتاج الإضافة في ملف links.js.",
+      setupNote: "روابط الحسابات المباشرة لم تُضف بعد؛ استعمل رابط الدليل أدناه للوصول إلى المنصات.",
       footerLine: "صُنع بالفضول، وتطوّر بالتجربة.", backTop: "العودة للأعلى", footerMotto: "Inspire · Know · Art",
-      addLink: "الرابط قريبًا", visit: "استكشف المشروع", source: "الكود المصدري", available: "افتح الحساب",
+      addLink: "الرابط غير مضاف", visit: "استكشف المشروع", source: "الكود المصدري", available: "افتح الحساب", directory: "كل حساباتي وروابطي", aboutPage: "عن TeachHorizon", contactPage: "تواصل", privacyPage: "سياسة الخصوصية", termsPage: "الشروط",
       projectPersonal: "تجربة شخصية", supportPersonal: "دعم شخصي", linkKofi: "ادعمني على Ko-fi", linkPayhip: "صفحة Payhip",
       socials: {
         tiktok: { name: "TikTok", text: "مقاطع قصيرة وأفكار سريعة", letter: "t" },
@@ -32,9 +32,9 @@
       socialKicker: "STAY CONNECTED", socialTitle: "Find me here", socialNote: "Follow new content and ideas across my social platforms.",
       projectKicker: "THE EXPERIMENT LAB", projectTitle: "Ideas in progress", projectNote: "Personal projects and vibe-coding experiments — a space to learn and play with ideas.",
       supportKicker: "A LITTLE SUPPORT", supportTitle: "Help keep the experiments going", supportDescription: "Enjoying the experiments? These are personal ways to support the time and work behind them.",
-      setupNote: "Some links still need to be added in links.js.",
+      setupNote: "Direct profile links have not been added yet; use the directory link below to reach the platforms.",
       footerLine: "Made with curiosity, shaped by experimentation.", backTop: "Back to top", footerMotto: "Inspire · Know · Art",
-      addLink: "Link coming soon", visit: "Explore project", source: "Source code", available: "Open profile",
+      addLink: "Not added yet", visit: "Explore project", source: "Source code", available: "Open profile", directory: "All my accounts and links", aboutPage: "About TeachHorizon", contactPage: "Contact", privacyPage: "Privacy", termsPage: "Terms",
       projectPersonal: "PERSONAL EXPERIMENT", supportPersonal: "PERSONAL SUPPORT", linkKofi: "Support on Ko-fi", linkPayhip: "Payhip page",
       socials: {
         tiktok: { name: "TikTok", text: "Short videos and quick ideas", letter: "t" },
@@ -70,7 +70,7 @@
       </article>`;
     }).join("");
   }
-  function renderProjects(t) {
+  function renderDirectory(t) {\n    const url = links.directory || "";\n    $("#socialDirectory").innerHTML = isRealUrl(url) ? `<a class="directory-link" href="${url}" target="_blank" rel="noopener noreferrer"><span>${t.directory}</span><span aria-hidden="true">↗</span></a>` : "";\n  }\n  function renderProjects(t) {
     $("#projectGrid").innerHTML = ["quantumVortex", "functionGrapher"].map((id) => {
       const item = t.projects[id];
       const url = links.projects?.[id] || "";
@@ -88,7 +88,7 @@
       { id: "kofi", label: t.linkKofi, icon: "♥" },
       { id: "payhip", label: t.linkPayhip, icon: "↗" }
     ];
-    $("#supportActions").innerHTML = support.map((item) => {
+    const active = support.filter(item => isRealUrl(links.support?.[item.id] || ""));\n    $("#support").hidden = active.length === 0;\n    $("#supportActions").innerHTML = active.map((item) => {
       const url = links.support?.[item.id] || "";
       return `<div class="support-action-wrap">${actionLink(url, `<span class="support-icon">${item.icon}</span>${item.label}`, "support-action")}</div>`;
     }).join("");
@@ -104,7 +104,7 @@
     });
     $("#languageToggle").innerHTML = lang === "ar" ? 'EN <span aria-hidden="true">↗</span>' : 'عربي <span aria-hidden="true">↗</span>';
     $("#languageToggle").setAttribute("aria-label", lang === "ar" ? "Switch to English" : "التبديل إلى العربية");
-    renderSocials(t); renderProjects(t); renderSupport(t);
+    renderSocials(t); renderDirectory(t); renderProjects(t); renderSupport(t);
     const anyMissing = Object.values(links.socials || {}).some(url => !isRealUrl(url)) || Object.values(links.support || {}).some(url => !isRealUrl(url));
     $("#socialSetupNote").hidden = !anyMissing;
   }
